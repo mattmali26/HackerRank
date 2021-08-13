@@ -40,17 +40,39 @@ namespace SherlockAndArray
             {
                 return "YES";
             }
+            else
+            {
+                if (arr.Count.Equals(2))
+                {
+                    return "NO";
+                }
+            }
 
             var sum = arr.Sum();
 
-            var add = 0;
-            for (int i = 0; i < arr.Count; i++)
+            var leftSum = arr[0];
+            var rightSum = sum - arr[1] - arr[0];
+            if (leftSum == rightSum)
             {
-                if (add == sum - i - add)
+                return "YES";
+            }
+            else
+            {
+                var i = 2;
+                for (; i < arr.Count; i++)
                 {
-                    return "YES";
+                    leftSum += arr[i - 1];
+                    rightSum -= arr[i];
+                    if (leftSum == rightSum)
+                    {
+                        return "YES";
+                        //break;
+                    }
                 }
-                add += i;
+                if (i == arr.Count)
+                {
+                    return "NO";
+                }
             }
 
             return "NO";
